@@ -3,7 +3,7 @@
 \title{ Samples in the posterior distribution of the frequencies and OR}
 \description{ Samples using Metropolis-Hasting Algorithm in the posterior distribution of the four haplotype frequencies and OR }
 \usage{ ASP.Bayesian(N, Tem_Gen, Index_Gen, IBD, snp, thin = 1, sd.freq = 0.05,
-                     sd.psi = 0.05, p0 = c(rep(1/4, 4), 1)) }
+                     sd.psi = 0.05, p0 = c(rep(1/4, 4), 1), psi.prior = 0) }
 \arguments{
   \item{N}{ Number of Metropolis-Hastings iterations }
   \item{Tem_Gen}{ Genotypes of controls (denoted by the number of alternative allele) }
@@ -14,6 +14,7 @@
   \item{sd.freq}{ Random walk standard deviation of the frequency logarithms }
   \item{sd.psi}{ Random walk standard deviation of the OR }
   \item{p0}{ The initial point of random walk }
+  \item{psi.prior}{ Precision of gaussian log(OR) prior (0 = improper flat prior)}
 }
 \details{ Samples using Metropolis-Hasting and likelihood defined by data. More precisely, give the frequency samples of haplotypes for observed SNP and unobserved causal SNP and give
           the sample of the odds ratio associated to the causal SNP. }

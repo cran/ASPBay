@@ -68,7 +68,7 @@ inline double likelihoodcpp(arma::rowvec f, double psi, IntegerVector S, Integer
 }
 
 // [[Rcpp::export]]
-arma::mat MHcpp(int N, int thin, IntegerVector S, IntegerVector R, double sd_freq, double sd_psi, arma::rowvec p0) {
+arma::mat MHcpp(int N, int thin, IntegerVector S, IntegerVector R, double sd_freq, double sd_psi, arma::rowvec p0, double psi_prior) {
 
   arma::mat X(1 + (N-1)/thin,5);
   // initial values
@@ -78,7 +78,7 @@ arma::mat MHcpp(int N, int thin, IntegerVector S, IntegerVector R, double sd_fre
 
   // initial likelihood
   double slog = sum(log(f));
-  double L = likelihoodcpp(f, psi, S, R) - 0.5*slog;
+  double L = likelihoodcpp(f, psi, S, R) - 0.5*psi_prior*log(psi)*log(psi) - 0.5*slog;
 
   for(int i = 1; i < N; i++) {
     // candidate values
@@ -91,7 +91,7 @@ arma::mat MHcpp(int N, int thin, IntegerVector S, IntegerVector R, double sd_fre
     double psi1 = psi*exp(R::rnorm(0,sd_psi));
     // likelihood
     double slog1 = sum(log(f1));
-    double L1 = likelihoodcpp(f1, psi1, S, R) - 0.5*slog1;
+    double L1 = likelihoodcpp(f1, psi1, S, R) - 0.5*psi_prior*log(psi1)*log(psi1) - 0.5*slog1;
     // accept
     if( log(R::runif(0,1)) < L1 - L + slog1 - slog) {
       f = f1; psi = psi1; L = L1; slog = slog1;

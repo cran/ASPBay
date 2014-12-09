@@ -11,10 +11,10 @@ function(Tem_Gen, Index_Gen, IBD)
   pvalue <- rep(0,p)
   for (i in 1:p)
   {
-    S <- c( sum(Tem_Gen[,i]==0), sum(Tem_Gen[,i]==1), sum(Tem_Gen[,i]==2) )
-	R <- c( sum(Index_Gen[,i]==0 & IBD==0), sum(Index_Gen[,i]==0 & IBD==1), sum(Index_Gen[,i]==0 & IBD==2),
-            sum(Index_Gen[,i]==1 & IBD==0), sum(Index_Gen[,i]==1 & IBD==1), sum(Index_Gen[,i]==1 & IBD==2),
-            sum(Index_Gen[,i]==2 & IBD==0), sum(Index_Gen[,i]==2 & IBD==1), sum(Index_Gen[,i]==2 & IBD==2) )
+    S <- c( sum(Tem_Gen[,i]==0, na.rm=TRUE), sum(Tem_Gen[,i]==1, na.rm=TRUE), sum(Tem_Gen[,i]==2, na.rm=TRUE) )
+	R <- c( sum(Index_Gen[,i]==0 & IBD==0, na.rm=TRUE), sum(Index_Gen[,i]==0 & IBD==1, na.rm=TRUE), sum(Index_Gen[,i]==0 & IBD==2, na.rm=TRUE),
+            sum(Index_Gen[,i]==1 & IBD==0, na.rm=TRUE), sum(Index_Gen[,i]==1 & IBD==1, na.rm=TRUE), sum(Index_Gen[,i]==1 & IBD==2, na.rm=TRUE),
+            sum(Index_Gen[,i]==2 & IBD==0, na.rm=TRUE), sum(Index_Gen[,i]==2 & IBD==1, na.rm=TRUE), sum(Index_Gen[,i]==2 & IBD==2, na.rm=TRUE) )
 
     q_hat <- ( sum(R[4:6]) + 2*sum(R[7:9]) + S[2] + 2*S[3] )/( 2*(sum(R)+sum(S)) )
     U1 <- -4*R[3] - 3*R[2] - 2*R[1] +

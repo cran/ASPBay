@@ -18,5 +18,5 @@ function(x,y,xbins,conf.int=c(0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,0.95))
     colorcut[j] <- (t[i]-0.5)/max(t)
   }
   
-  list(t=t,i=i,s=s/sum(bin@count),colorcut=c(0,rev(colorcut),1))
+  list(t=t,i=i,s=s/sum(bin@count),colorcut=c(0,rev(colorcut),1),count=bin@count)
 }

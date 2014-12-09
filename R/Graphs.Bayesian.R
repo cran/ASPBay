@@ -12,21 +12,21 @@ function(M, burn=0, xbins=200, ORlim=c(1,5), conf.int=c(0.2,0.3,0.4,0.5,0.6,0.7,
 
   if (burn!=0)
   {
-    psi2 <- (psi[-(1:burn)])[psi[-(1:burn)]<ORlim[2]]
-    r22 <- (R2[-(1:burn)])[psi[-(1:burn)]<ORlim[2]]
+    psi2 <- psi[-(1:burn)]
+    r22 <- R2[-(1:burn)]
 	fa2 <- fa[-(1:burn)]
 	fb2 <- Fb[-(1:burn)]
   } else {
-    psi2 <- psi[psi<ORlim[2]]
-    r22 <- R2[psi<ORlim[2]]
+    psi2 <- psi
+    r22 <- R2
     fa2 <- fa
 	fb2 <- Fb
   }
 
   # r² and OR graph  
-  int <- cred_int(R2,psi,xbins,conf.int=conf.int)
+  int <- cred_int(r22,psi2,xbins,conf.int=conf.int)
   hex_r2_OR <- hexbinplot(y~x,data.frame(x=r22,y=psi2),aspect=1, xbins=xbins, style = "colorscale",colorcut=unique(int$colorcut),colramp= function(n){colorhex(n,beg=15,end=225)}, ylim=ORlim, ylab='OR', xlab=expression(r^2))
-  hex_r2_OR <- graph_cred_int(hex_r2_OR,conf.int=conf.int)
+  hex_r2_OR <- graph_cred_int(hex_r2_OR,conf.int=conf.int,count=int$count)
   if (print==TRUE)
   {
     dev.new()
@@ -36,7 +36,7 @@ function(M, burn=0, xbins=200, ORlim=c(1,5), conf.int=c(0.2,0.3,0.4,0.5,0.6,0.7,
   # frequencies graph  
   int <- cred_int(fa2,fb2,xbins,conf.int=conf.int)
   hex_fa_fb <- hexbinplot(y~x,data.frame(x=fa2,y=fb2),aspect=1, xbins=xbins, style = "colorscale",colorcut=unique(int$colorcut),colramp= function(n){colorhex(n,beg=15,end=225)}, xlab='fa', ylab='fb')
-  hex_fa_fb <- graph_cred_int(hex_fa_fb,conf.int=conf.int)
+  hex_fa_fb <- graph_cred_int(hex_fa_fb,conf.int=conf.int,count=int$count)
   if (print==TRUE)
   {
     dev.new()

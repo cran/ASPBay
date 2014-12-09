@@ -1,5 +1,5 @@
 graph_cred_int <-
-function(hex,title='Credibility \n level',conf.int)
+function(hex,title='Credibility \n level',conf.int,count)
 {
   # We change the function to obtain the good title
   hex$legend$right$fun <- function (legend = 1.2, inner = legend/5, cex.labels = 1, cex.title = 1.2,
@@ -137,27 +137,12 @@ function(hex,title='Credibility \n level',conf.int)
     else ans
   }
   
-  bin <- hexbin(hex$panel.args[[1]]$x,hex$panel.args[[1]]$y, xbins=hex$panel.args.common$xbins)
-  t <- rev(unique(sort(bin@count)))
-  colorcut <- rep(NA,length(conf.int))
-  s <- 0
-  i <- 0
-  for (j in 1:length(colorcut))
-  {
-    while ( s < sum(bin@count)*conf.int[j] )
-    {
-      i <- i+1
-      s <- s + sum( bin@count[ bin@count == t[i] ] )
-    }
-    colorcut[j] <- (t[i]-0.5)/max(t)
-  }
-  
-  colorcut <- c(0,hex$legend$right$args$colorcut,1)*hex$panel.args.common$maxcnt
+  colorcut <- hex$panel.args.common$colorcut*max(count)
   
   perc <- rep(NA,length(colorcut))
   for ( i in 1:length(colorcut) )
   {
-    perc[i] <- sum( bin@count[ bin@count >= colorcut[i] ] )/sum( bin@count )
+    perc[i] <- sum( count[ count >= colorcut[i] ] )/( sum( count ) )
   }
   hex$legend$right$args$colorcut <- unique(perc)
   
