@@ -9,7 +9,7 @@
   \item{IBD}{ IBD states for each affected sib pair }
 }
 \details{ Give the values of statistic and p-value of the association score test. }
-\value{
+\value{List of 2 vectors of length the number of SNPs:
   \item{Value}{ Statistic values for each SNPs }
   \item{Pvalue}{ P-values of the score test for each SNPs }
 }

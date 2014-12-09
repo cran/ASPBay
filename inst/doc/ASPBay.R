@@ -1,4 +1,4 @@
-### R code from vignette source '/home1/dandine/ASPBay.Rnw'
+### R code from vignette source 'ASPBay.Rnw'
 ### Encoding: UTF-8
 
 ###################################################
@@ -51,8 +51,8 @@ Select$SNPnames_subset
 ###################################################
 ### code chunk number 8: ASPBay.Rnw:121-123
 ###################################################
-M15 <- ASP.Bayesian(1e7, ASPData$Control, ASPData$Index, ASPData$IBD, 15, sd.psi=0.03)
-G15 <- Graphs.Bayesian(M15, burn = 10000, print=FALSE)
+M15 <- ASP.Bayesian(1e7, ASPData$Control, ASPData$Index, ASPData$IBD, 15, thin = 10, sd.psi=0.03)
+G15 <- Graphs.Bayesian(M15, burn = 1000, print=FALSE)
 
 
 ###################################################

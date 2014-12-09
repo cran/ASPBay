@@ -68,9 +68,9 @@ inline double likelihoodcpp(arma::rowvec f, double psi, IntegerVector S, Integer
 }
 
 // [[Rcpp::export]]
-arma::mat MHcpp(int N, IntegerVector S, IntegerVector R, double sd_freq, double sd_psi, arma::rowvec p0) {
+arma::mat MHcpp(int N, int thin, IntegerVector S, IntegerVector R, double sd_freq, double sd_psi, arma::rowvec p0) {
 
-  arma::mat X(N,5);
+  arma::mat X(1 + (N-1)/thin,5);
   // initial values
   X.row(0) = p0;
   arma::rowvec f = X.row(0).cols(0,3);
@@ -97,8 +97,10 @@ arma::mat MHcpp(int N, IntegerVector S, IntegerVector R, double sd_freq, double 
       f = f1; psi = psi1; L = L1; slog = slog1;
     }
     // fill X
-    X.row(i).cols(0,3) = f;
-    X(i,4) = psi;
+    if(i % thin == 0) {
+      X.row(i/thin).cols(0,3) = f;
+      X(i/thin,4) = psi;
+    }
   }
   return X;
 }

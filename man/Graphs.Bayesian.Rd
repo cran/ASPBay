@@ -18,7 +18,7 @@
 		  Before plotting the graphs, the causal odds ratio is transformed. The value of OR is kept if it is superior to 1, otherwise it is inversed.
 		  The alternative causal allele frequency is transformes accordingly: if the OR is inferior to 1, the frequency is replaced by its complement to 1.
 		  With this transformations, we avoid to obtain two peaks corresponding to equivalent parameter values.}
-\value{ 
+\value{ List of 2 hexbin objects:
  \item{hex_r2_OR}{ Hexbinplot object with the linkage disequilibrium between observed and causal SNPs in abscissae and the OR of causal SNP in ordinates. }
  \item{hex_fa_fb}{ Hexbinplot object with the alternative allele frequency of causal SNP in abscissae and the alternative allele frequency of observed SNP in ordinates. }
 }

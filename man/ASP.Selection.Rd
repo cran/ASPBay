@@ -12,7 +12,7 @@
 \details{
 Take the genotypes of controls and index cases and the IBD states. Give the score statistics, discrimination statistics and the subset of selected SNPs with the chosen threshold.
 }
-\value{
+\value{ List of 4 vectors with components:
   \item{score}{ The values of the score statistic for each SNPs }
   \item{stat}{ The values of discrimination statistic comparing each SNPs with the most associated SNP }
   \item{SNP_subset}{ The indexes (numbers of columns) of selected SNPs }
